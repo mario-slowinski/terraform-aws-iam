@@ -5,5 +5,5 @@ resource "aws_iam_role_policy_attachment" "role-policy" {
   }
 
   role       = each.value.role
-  policy_arn = local.policies[each.value.policy].arn
+  policy_arn = startswith(each.value.policy, "arn:aws:iam:") ? each.value.policy : local.policies[each.value.policy].arn
 }
